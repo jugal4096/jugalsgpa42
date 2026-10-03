@@ -139,3 +139,29 @@ popup.addEventListener("click", (e) => {
     popup.style.display = "none";
   }
 });
+
+
+/* ================= GRADLY 2.0 ANNOUNCEMENT ================= */
+const gradlyAnnouncement = document.getElementById("gradlyAnnouncement");
+const gradlyClose = document.getElementById("gradlyClose");
+const gradlyContinue = document.getElementById("gradlyContinue");
+
+function closeGradlyAnnouncement() {
+  gradlyAnnouncement.classList.add("hidden");
+}
+
+gradlyClose.addEventListener("click", closeGradlyAnnouncement);
+gradlyContinue.addEventListener("click", closeGradlyAnnouncement);
+
+gradlyAnnouncement.addEventListener("click", (e) => {
+  if (e.target === gradlyAnnouncement) closeGradlyAnnouncement();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeGradlyAnnouncement();
+});
+
+/* Show on every fresh visit */
+window.setTimeout(() => {
+  gradlyAnnouncement.classList.remove("hidden");
+}, 700);
