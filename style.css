@@ -274,3 +274,142 @@ h1 {
     margin-bottom: 12px;
   }
 }
+
+
+/* ================= GRADLY 2.0 ANNOUNCEMENT ================= */
+.gradly-announcement {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: rgba(2, 6, 23, 0.72);
+  backdrop-filter: blur(10px);
+  z-index: 100000;
+  animation: gradlyFadeIn 0.3s ease;
+}
+
+.gradly-announcement.hidden {
+  display: none;
+}
+
+.gradly-announcement-card {
+  position: relative;
+  width: min(430px, 100%);
+  padding: 34px 30px 30px;
+  text-align: center;
+  border-radius: 28px;
+  border: 1px solid rgba(167, 139, 250, 0.42);
+  background:
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.20), transparent 38%),
+    radial-gradient(circle at bottom left, rgba(167, 139, 250, 0.18), transparent 42%),
+    linear-gradient(145deg, rgba(15, 23, 42, 0.97), rgba(2, 6, 23, 0.98));
+  box-shadow: 0 35px 100px rgba(0,0,0,0.72), 0 0 55px rgba(96,165,250,0.12);
+  animation: gradlyPopIn 0.4s ease;
+}
+
+.gradly-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  font-size: 25px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.gradly-badge {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(96,165,250,0.20), rgba(167,139,250,0.25));
+  border: 1px solid rgba(167,139,250,0.35);
+  color: #ddd6fe;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.gradly-rocket {
+  margin: 17px 0 8px;
+  font-size: 3.3rem;
+  animation: gradlyFloat 2.5s ease-in-out infinite;
+}
+
+.gradly-announcement-card h3 {
+  margin-bottom: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.65rem;
+}
+
+.gradly-announcement-card p {
+  margin-bottom: 20px;
+  color: var(--text-muted);
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+.gradly-note {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 23px;
+  padding: 13px 14px;
+  text-align: left;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.09);
+  color: #e5e7eb;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.gradly-continue {
+  width: 100%;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--blue), var(--green));
+  color: #020617;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 14px 35px rgba(52,211,153,0.28);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.gradly-continue:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 45px rgba(96,165,250,0.35);
+}
+
+@keyframes gradlyFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes gradlyPopIn {
+  from { opacity: 0; transform: translateY(15px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes gradlyFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@media (max-width: 600px) {
+  .gradly-announcement-card {
+    padding: 30px 22px 24px;
+    border-radius: 24px;
+  }
+
+  .gradly-announcement-card h3 {
+    font-size: 1.4rem;
+  }
+}
