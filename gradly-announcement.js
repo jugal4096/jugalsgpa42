@@ -27,9 +27,33 @@
     document.addEventListener("visibilitychange",checkLaunch);
   } else { return; }
 
-  // login.html already contains the announcement and its existing controller.
-  // Reuse it there to avoid creating a duplicate popup.
-  if (document.getElementById("gradlyAnnouncement")) return;
+  // login.html has its own matching announcement markup. Keep it, but make
+  // the announcement mandatory: users may proceed only via the Continue button.
+  if (document.getElementById("gradlyAnnouncement")) {
+    const mandatoryStyle = document.createElement("style");
+    mandatoryStyle.textContent = "#gradlyAnnouncement .gradly-close{display:none!important}html.gradly-announcement-open,html.gradly-announcement-open body{overflow:hidden!important}";
+    document.head.appendChild(mandatoryStyle);
+    document.documentElement.classList.add("gradly-announcement-open");
+    document.addEventListener("click", event => {
+      const target = event.target;
+      if (target && (target.closest("#gradlyClose") || target === document.getElementById("gradlyAnnouncement"))) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }, true);
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }, true);
+    const loginPopup = document.getElementById("gradlyAnnouncement");
+    const continueButton = document.getElementById("gradlyContinue");
+    continueButton?.addEventListener("click", () => {
+      document.documentElement.classList.remove("gradly-announcement-open");
+    });
+    return;
+  }
 
   const style = document.createElement("style");
   style.textContent = `
@@ -157,7 +181,6 @@
   popup.setAttribute("aria-labelledby", "gradlyGlobalAnnouncementTitle");
   popup.innerHTML = `
     <div class="gradly-global-card">
-      <button class="gradly-global-close" aria-label="Close announcement">×</button>
       <div class="gradly-global-badge">GRADLY • 2.0</div>
       <div class="gradly-global-rocket" aria-hidden="true">🚀</div>
       <h3 id="gradlyGlobalAnnouncementTitle">Gradly 2.0 is Coming</h3>
@@ -171,16 +194,32 @@
   `;
   document.body.appendChild(popup);
 
-  const close = () => popup.classList.add("hidden");
-  popup.querySelector(".gradly-global-close").addEventListener("click", close);
-  popup.querySelector(".gradly-global-continue").addEventListener("click", close);
-  popup.addEventListener("click", e => {
-    if (e.target === popup) close();
+  // The modal is intentionally non-dismissible. The Continue button is the
+  // sole acknowledgement that lets the visitor proceed on this page.
+  const continueButton = popup.querySelector(".gradly-global-continue");
+  continueButton.addEventListener("click", () => {
+    popup.classList.add("hidden");
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
   });
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") close();
+  popup.addEventListener("click", event => {
+    if (event.target === popup) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
   });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  });
+  document.documentElement.style.overflow = "hidden";
+  document.body.style.overflow = "hidden";
 
   // Show on every page load/refresh. No localStorage or sessionStorage.
-  window.setTimeout(() => popup.classList.remove("hidden"), 500);
+  window.setTimeout(() => {
+    popup.classList.remove("hidden");
+    continueButton.focus();
+  }, 500);
 })();
