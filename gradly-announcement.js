@@ -1,5 +1,32 @@
 /* ================= GRADLY 2.0 GLOBAL ANNOUNCEMENT ================= */
 (() => {
+  // Retire Gradly V1 at the official Gradly-V2 launch time (20:00 IST, 24 Nov 2026).
+  // Before the cutoff, leave the existing announcement and all page behavior untouched.
+  const GRADLY_V2_LAUNCH_UTC = Date.UTC(2026, 10, 24, 14, 30, 0);
+  let retirementShown = false;
+  const showRetirementGate = () => {
+    if (retirementShown || Date.now() < GRADLY_V2_LAUNCH_UTC) return;
+    retirementShown = true;
+    document.documentElement.style.cssText = "margin:0!important;padding:0!important;overflow:hidden!important;background:#070b16!important";
+    document.body.innerHTML = "";
+    const style = document.createElement("style");
+    style.textContent = "*{box-sizing:border-box}body{margin:0!important;min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 0%,#172554 0%,#090d1a 48%,#03050b 100%);color:#f8fafc;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;text-align:center}.gradly-retired{width:min(520px,100%);padding:clamp(30px,7vw,54px) clamp(22px,6vw,42px);border:1px solid rgba(148,163,184,.28);border-radius:28px;background:rgba(15,23,42,.78);box-shadow:0 30px 100px #0009;backdrop-filter:blur(18px)}.gradly-retired .mark{font-size:46px;margin-bottom:18px}.gradly-retired .tag{display:inline-block;padding:7px 14px;border:1px solid #64748b66;border-radius:99px;color:#cbd5e1;font-size:12px;font-weight:750;letter-spacing:2px}.gradly-retired h1{font-size:clamp(30px,7vw,42px);line-height:1.12;margin:22px 0 14px}.gradly-retired p{color:#cbd5e1;font-size:16px;line-height:1.7;margin:0 0 26px}.gradly-retired a{display:block;padding:15px 22px;border-radius:14px;background:linear-gradient(110deg,#60a5fa,#34d399);color:#06111f;text-decoration:none;font-weight:800;font-size:16px}.gradly-retired .foot{font-size:12px;color:#94a3b8;margin:18px 0 0}";
+    document.head.appendChild(style);
+    const card=document.createElement("main");
+    card.className="gradly-retired";
+    card.innerHTML='<div class="tag">GRADLY · NEXT CHAPTER</div><div class="mark" aria-hidden="true">🚀</div><h1>Gradly-V1 is outdated.</h1><p>Thank you for being part of the journey. Gradly-V2 is now live with a refreshed academic experience. Continue on the new platform.</p><a href="https://gradly-v2.vercel.app/">Continue to Gradly-V2</a><div class="foot">You will be redirected automatically in a few seconds.</div>';
+    document.body.appendChild(card);
+    window.setTimeout(()=>{window.location.replace("https://gradly-v2.vercel.app/")},8000);
+  };
+  showRetirementGate();
+  if (!retirementShown) {
+    const checkLaunch = () => showRetirementGate();
+    window.setInterval(checkLaunch,1000);
+    window.addEventListener("focus",checkLaunch);
+    window.addEventListener("pageshow",checkLaunch);
+    document.addEventListener("visibilitychange",checkLaunch);
+  } else { return; }
+
   // login.html already contains the announcement and its existing controller.
   // Reuse it there to avoid creating a duplicate popup.
   if (document.getElementById("gradlyAnnouncement")) return;
