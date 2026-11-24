@@ -1,22 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Redirecting...</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101c2d">
+  <meta http-equiv="refresh" content="12;url=https://gradly-v2.netlify.app/">
+  <title>Gradly-V1 is outdated · Welcome to Gradly-V2</title>
+  <style>
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    body{min-height:100vh;display:grid;place-items:center;padding:28px 18px;color:#f7fbff;background:radial-gradient(ellipse at 16% 12%,rgba(70,132,196,.28),transparent 38%),radial-gradient(ellipse at 88% 90%,rgba(36,174,133,.20),transparent 35%),linear-gradient(145deg,#0b1422,#14263a 58%,#101d2c)}
+    .wrap{width:min(680px,100%);position:relative}
+    .glow{position:absolute;inset:12% 8%;filter:blur(65px);background:linear-gradient(110deg,rgba(66,153,225,.22),rgba(52,211,153,.18));pointer-events:none}
+    .card{position:relative;padding:clamp(30px,7vw,58px);border:1px solid rgba(202,222,241,.2);border-radius:30px;background:linear-gradient(145deg,rgba(28,48,70,.94),rgba(13,27,43,.96));box-shadow:0 32px 100px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.08);text-align:center;overflow:hidden}
+    .brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:30px;font-weight:850;letter-spacing:.04em;font-size:17px}
+    .brand-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:13px;background:linear-gradient(145deg,#7dd3fc,#6ee7b7);color:#102238;font-size:20px;box-shadow:0 8px 24px rgba(94,234,212,.18)}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border:1px solid rgba(251,146,60,.34);border-radius:999px;background:rgba(251,146,60,.10);color:#fed7aa;font-size:11px;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+    h1{max-width:540px;margin:22px auto 14px;font-size:clamp(32px,7vw,52px);line-height:1.06;letter-spacing:-.045em}
+    h1 span{color:#fbbf74}
+    .lead{max-width:500px;margin:0 auto;color:#c5d5e4;font-size:clamp(14px,2.4vw,17px);line-height:1.75}
+    .features{display:flex;justify-content:center;flex-wrap:wrap;gap:9px;margin:26px 0 30px}
+    .features span{padding:8px 11px;border:1px solid rgba(191,219,254,.16);border-radius:10px;background:rgba(255,255,255,.045);color:#d7e8f7;font-size:11px;font-weight:650}
+    .cta{display:flex;align-items:center;justify-content:center;gap:11px;width:100%;max-width:390px;margin:0 auto;padding:16px 22px;border-radius:14px;background:linear-gradient(105deg,#7dd3fc,#6ee7b7);color:#102238;text-decoration:none;font-size:15px;font-weight:900;box-shadow:0 12px 30px rgba(52,211,153,.18);transition:transform .2s,box-shadow .2s}
+    .cta:hover{transform:translateY(-2px);box-shadow:0 17px 38px rgba(52,211,153,.28)}
+    .timer{margin:18px 0 0;color:#9fb3c7;font-size:12px;line-height:1.6}
+    .timer strong{color:#d8e8f5}
+    .foot{margin-top:30px;padding-top:20px;border-top:1px solid rgba(191,219,254,.12);color:#8298ad;font-size:11px;letter-spacing:.02em}
+    @media(prefers-reduced-motion:reduce){.cta{transition:none}.cta:hover{transform:none}}
+  </style>
 </head>
 <body>
-  <script type="module">
-    import { auth } from "./firebase.js";
-    import { onAuthStateChanged }
-    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-    onAuthStateChanged(auth, user => {
-      if (user) {
-        window.location.replace("dashboard.html");
-      } else {
-        window.location.replace("login.html");
-      }
-    });
+  <main class="wrap">
+    <div class="glow" aria-hidden="true"></div>
+    <section class="card" aria-labelledby="title">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">G</span><span>GRADLY</span></div>
+      <div class="eyebrow">A new chapter begins</div>
+      <h1 id="title">Gradly-V1 is <span>outdated.</span></h1>
+      <p class="lead">The original GECA SGPA platform has been retired. Gradly-V2 is now the home for your academic journey, with a refreshed experience and new tools. Continue on the latest platform.</p>
+      <div class="features" aria-label="Gradly-V2 highlights">
+        <span>SGPA &amp; CGPA insights</span><span>Online result fetching</span><span>Academic progress</span>
+      </div>
+      <a class="cta" href="https://gradly-v2.netlify.app/">Continue with Gradly-V2 <span aria-hidden="true">→</span></a>
+      <p class="timer">This page will take you to Gradly-V2 automatically in <strong>12 seconds</strong>.</p>
+      <div class="foot">Thank you for being part of Gradly. See you on the next chapter.</div>
+    </section>
+  </main>
+  <script>
+    window.setTimeout(() => window.location.replace("https://gradly-v2.netlify.app/"), 12000);
   </script>
-  <script src="gradly-announcement.js"></script>\n</body>
+</body>
 </html>
